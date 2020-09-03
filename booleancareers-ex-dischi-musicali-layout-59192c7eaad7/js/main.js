@@ -4,7 +4,7 @@ $(document).ready(function() {
 		  'url': 'https://flynn.boolean.careers/exercises/api/array/music',
 		  'method': 'GET',
 		  'success': function(risposta){
-					/*console.log(risposta);*/
+					console.log(risposta);
 					var source = $('#entry-template').html();
 				   	var template = Handlebars.compile(source);
 					for (i = 0; i< risposta.response.length ; i ++) {
@@ -17,12 +17,17 @@ $(document).ready(function() {
 		  'error':function(){
 			alert('errore!');
 		  }
-		}
-	);
-	$( "#genere" ).change(function() {
-		var genere = ($('#genere').val());
-		if (genere == "All") {
-			$("#Rock").hide("slow");
-		}
-	});
+		});
+
+		$('#scelta option').click(function(){
+			var genere = $(this).html();
+			console.log(genere);
+			if(genere == 'All'){
+				$('.cd').show();
+			} else{
+				$('.cd').hide();
+				$('.cd.' + genere).show();
+			}
+		});
+
 });
